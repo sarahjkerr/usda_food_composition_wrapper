@@ -4,7 +4,7 @@ import json
 
 class Food:
     
-    def __init__(self, api_key, keword, limit):
+    def __init__(self, api_key, keyword, limit):
         self.key = api_key
         self.keyword = keyword
         self.limit = limit
@@ -14,5 +14,5 @@ class Food:
         params = {'q': self.keyword,
                   'max': self.limit,
                   'api_key': self.key}
-        self.response = requests.get(base_url, params=params)
-        return self.response.text
+        response = requests.get(base_url, params=params).json()
+        return response
