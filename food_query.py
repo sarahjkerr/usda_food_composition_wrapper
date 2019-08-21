@@ -1,17 +1,14 @@
 import requests
-import pandas as pd
 
 class Food:
     
-    def __init__(self, api_key, keyword, limit):
+    def __init__(self, api_key):
         self.key = api_key
-        self.keyword = keyword
-        self.limit = limit
+        self.base_url = 'https://api.nal.usda.gov/ndb/search/?format=json'
     
-    def search_foods(self):
-        base_url = 'https://api.nal.usda.gov/ndb/search/?format=json'
-        params = {'q': self.keyword,
-                  'max': self.limit,
+    def search_foods(self, keyword, limit):
+        params = {'q': keyword,
+                  'max': limit,
                   'api_key': self.key}
-        response = requests.get(base_url, params=params).json()
+        response = requests.get(self.base_url, params=params).json()
         return response
